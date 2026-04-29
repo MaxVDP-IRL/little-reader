@@ -1,95 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#6c63ff" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Little Reader" />
-  <title>Little Reader</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #7c73ff 0%, #6c63ff 40%, #48439e 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    .picker-logo { font-size: 3rem; margin-bottom: 0.5rem; text-align: center; }
-    h1 {
-      color: white;
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      text-align: center;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.2);
-      letter-spacing: -0.01em;
-    }
-    .profiles {
-      display: flex;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .profile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      padding: 1.8rem 2.25rem;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 3px solid rgba(255,255,255,0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .profile:hover, .profile:active {
-      transform: scale(1.05);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-    }
-    .avatar {
-      width: 126px;
-      height: 126px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4.5rem;
-      border: 4px solid white;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.28);
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-    .name {
-      color: white;
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Little Reader</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #6C63FF 0%, #48CAE4 100%); font-family: 'Segoe UI', Arial, sans-serif; }
+  h1 { color: white; font-size: 1.7rem; margin-bottom: 2rem; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.2); letter-spacing: 0.01em; }
+  .profiles { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; padding: 0 1rem; }
+  .profile { background: white; border-radius: 20px; padding: 1.6rem 2rem; text-align: center; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.15); transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; display: block; min-width: 130px; }
+  .profile:hover, .profile:active { transform: scale(1.06); box-shadow: 0 12px 40px rgba(0,0,0,0.22); }
+  .avatar { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 900; color: white; margin: 0 auto 1rem; }
+  .mia .avatar { background: linear-gradient(135deg, #FFB6C1, #FF69B4); }
+  .oskar .avatar { background: linear-gradient(135deg, #90EE90, #3CB371); }
+  .name { font-size: 1.6rem; font-weight: 800; color: #333; }
+</style>
 </head>
 <body>
-  <div class="picker-logo">&#128218;</div>
-  <h1>Who&#8217;s reading today?</h1>
-  <div class="profiles">
-    <a href="app.html?name=Mia" class="profile">
-      <div class="avatar" style="background: linear-gradient(135deg, #ff4d8d, #ff6b9d);">&#127827;</div>
-      <div class="name">Mia</div>
-    </a>
-    <a href="app.html?name=Oskar" class="profile">
-      <div class="avatar" style="background: linear-gradient(135deg, #2ab8a0, #1a9e88);">&#128009;</div>
-      <div class="name">Oskar</div>
-    </a>
-  </div>
+<h1>Who is reading today?</h1>
+<div class="profiles">
+  <a href="app.html?name=Mia" class="profile mia">
+    <div class="avatar">M</div>
+    <div class="name">Mia</div>
+  </a>
+  <a href="app.html?name=Oskar" class="profile oskar">
+    <div class="avatar">O</div>
+    <div class="name">Oskar</div>
+  </a>
+</div>
 </body>
 </html>
