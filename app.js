@@ -88,72 +88,7 @@ function renderQuestion(){const overlay=document.getElementById('feedback-overla
 function renderSightWord(item,content,controls){const others=SIGHT_WORDS.filter(w=>w.word!==item.word);const wrongs=shuffle(others).slice(0,3).map(w=>w.word);const options=shuffle([item.word,...wrongs]);const card=document.createElement('div');card.className='word-card';card.innerHTML='<span class="word-emoji">'+item.emoji+'</span><div class="word-hint">'+item.hint+'</div><div class="word-hint" style="margin-top:12px;font-size:13px;color:#aaa">Which word matches?</div>';content.appendChild(card);const grid=document.createElement('div');grid.className='options-grid';options.forEach(opt=>{const btn=document.createElement('button');btn.className='option-btn';btn.textContent=opt;btn.addEventListener('click',()=>handleSightAnswer(btn,opt,item.word,grid));grid.appendChild(btn);});content.appendChild(grid);}
 function handleSightAnswer(btn,chosen,correct,grid){const allBtns=grid.querySelectorAll('.option-btn');allBtns.forEach(b=>b.disabled=true);if(chosen===correct){btn.classList.add('correct');state.correct++;state.score++;state.dailyCount++;document.getElementById('game-score').textContent='⭐ '+state.score;showFeedback(true);}else{btn.classList.add('wrong');allBtns.forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});showFeedback(false);}state.total++;setTimeout(nextQuestion,1400);}
 function renderPhonics(item,content,controls){const card=document.createElement('div');card.className='phonics-card';card.innerHTML='<div style="font-size:48px;margin-bottom:12px">'+item.emoji+'</div><div class="phonics-chunks" id="chunks-display"></div><div class="phonics-full">Tap each part, then press the button</div>';content.appendChild(card);const chunksDisplay=card.querySelector('#chunks-display');item.chunks.forEach((chunk,i)=>{const span=document.createElement('span');span.className='phonics-chunk';span.textContent=chunk;span.addEventListener('click',()=>{span.style.transform='scale(0.85)';setTimeout(()=>span.style.transform='',150);speakText(chunk);});chunksDisplay.appendChild(span);});const contBtn=document.createElement('button');contBtn.className='btn-continue';contBtn.textContent='Say it: '+item.word+' '+item.emoji;contBtn.addEventListener('click',()=>{speakText(item.word);state.correct++;state.score++;state.dailyCount++;document.getElementById('game-score').textContent='⭐ '+state.score;state.total++;showFeedback(true);setTimeout(nextQuestion,1400);});controls.appendChild(contBtn);}
-function renderSentence(item,content,controls){const card=document.createElement('div');card.className='sentence-card';const emoji=document.createElement('div');emoji.style.cssText='font-size:48px;text-align:center;margin-bottom:16px';emoji.textContent=item.emoji;card.appendChild(emoji);const textDiv=document.createElement('div');textDiv.className='sentence-text';const words=item.text.split(' ');const wordSpans=[];words.forEach((word,i)=>{const span=document.createElement('span');span.className='sentence-word'+(i===0?' current':'');span.textContent=word+' ';span.addEventListener('click',()=>{wordSpans.forEach(s=>s.classList.remove('current'));span.classList.add('read');const next=wordSpans[i+1];if(next)next.classList.add('current');speakText(word.replace(/[^a-zA-Z]/g,''));});textDiv.appendChild(span);wordSpans.push(span);});card.appendChild(textDiv);content.appendChild(card);const readBtn=document.createElement('button');readBtn.className='btn-continue';readBtn.textContent='🔊 Read aloud';readBtn.addEventListener('click',()=>{speakText(item.text);wordSpans.forEach((s,i)=>{setTimeout(()=>{wordSpans.forEach(x=>x.classList.remove('current'));s.classList.add('current','read');},i*350);});});const doneBtn=document.createElement('button');doneBtn.className='btn-continue';doneBtn.textContent='✅ I read it!';doneBtn.style.marginTop='8px';doneBtn.addEventListener('click',()=>{state.correct++;state.score++;state.dailyCount++;document.getElementById('game-score').textContent='⭐ '+state.score;state.total++;showFeedback(true);setTimeout(nextQuestion,1400);});controls.appendChild(readBtn);controls.appendChild(doneBtn);}'div');
-  card.className = 'sentence-card';
-
-  const emoji = document.createElement('div');
-  emoji.style.cssText = 'font-size:48px;text-align:center;margin-bottom:16px';
-  emoji.textContent = item.emoji;
-  card.appendChild(emoji);
-
-  const textDiv = document.createElement('div');
-  textDiv.className = 'sentence-text';
-
-  const words = item.text.split(' ');
-  let currentIndex = 0;
-  const wordSpans = [];
-
-  words.forEach((word, i) => {
-    const span = document.createElement('span');
-    span.className = 'sentence-word' + (i === 0 ? ' current' : '');
-    span.textContent = word + ' ';
-    span.dataset.index = i;
-    span.addEventListener('click', () => {
-      wordSpans.forEach(s => s.classList.remove('current'));
-      span.classList.add('read');
-      const nextSpan = wordSpans[i + 1];
-      if (nextSpan) nextSpan.classList.add('current');
-      speakText(word.replace(/[^a-zA-Z]/g, ''));
-    });
-    textDiv.appendChild(span);
-    wordSpans.push(span);
-  });
-
-  card.appendChild(textDiv);
-  content.appendChild(card);
-
-  const readBtn = document.createElement('button');
-  readBtn.className = 'btn-continue';
-  readBtn.textContent = 'ð Read aloud';
-  readBtn.addEventListener('click', () => {
-    speakText(item.text);
-    wordSpans.forEach((s, i) => {
-      setTimeout(() => {
-        wordSpans.forEach(x => x.classList.remove('current'));
-        s.classList.add('current', 'read');
-      }, i * 350);
-    });
-  });
-
-  const doneBtn = document.createElement('button');
-  doneBtn.className = 'btn-continue';
-  doneBtn.textContent = 'â I read it!';
-  doneBtn.style.marginTop = '8px';
-  doneBtn.addEventListener('click', () => {
-    state.correct++;
-    state.score++;
-    state.dailyCount++;
-    document.getElementById('game-score').textContent = 'â­ ' + state.score;
-    state.total++;
-    showFeedback(true);
-    setTimeout(nextQuestion, 1400);
-  });
-
-  controls.appendChild(readBtn);
-  controls.appendChild(doneBtn);
-}
-
-// ===== Spelling =====
+function renderSentence(item,content,controls){const card=document.createElement('div');card.className='sentence-card';const emoji=document.createElement('div');emoji.style.cssText='font-size:48px;text-align:center;margin-bottom:16px';emoji.textContent=item.emoji;card.appendChild(emoji);const textDiv=document.createElement('div');textDiv.className='sentence-text';const words=item.text.split(' ');const wordSpans=[];words.forEach((word,i)=>{const span=document.createElement('span');span.className='sentence-word'+(i===0?' current':'');span.textContent=word+' ';span.addEventListener('click',()=>{wordSpans.forEach(s=>s.classList.remove('current'));span.classList.add('read');const next=wordSpans[i+1];if(next)next.classList.add('current');speakText(word.replace(/[^a-zA-Z]/g,''));});textDiv.appendChild(span);wordSpans.push(span);});card.appendChild(textDiv);content.appendChild(card);const readBtn=document.createElement('button');readBtn.className='btn-continue';readBtn.textContent='🔊 Read aloud';readBtn.addEventListener('click',()=>{speakText(item.text);wordSpans.forEach((s,i)=>{setTimeout(()=>{wordSpans.forEach(x=>x.classList.remove('current'));s.classList.add('current','read');},i*350);});});const doneBtn=document.createElement('button');doneBtn.className='btn-continue';doneBtn.textContent='✅ I read it!';doneBtn.style.marginTop='8px';doneBtn.addEventListener('click',()=>{state.correct++;state.score++;state.dailyCount++;document.getElementById('game-score').textContent='⭐ '+state.score;state.total++;showFeedback(true);setTimeout(nextQuestion,1400);});controls.appendChild(readBtn);controls.appendChild(doneBtn);}// ===== Spelling =====
 function renderSpelling(item, content, controls) {
   state.spellingInput = [];
   const word = item.word;
