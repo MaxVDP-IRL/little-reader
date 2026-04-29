@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Little Reader" />
+  <title>Little Reader</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="screen-home" class="screen active">
+      <div class="home-header">
+        <div class="app-logo">📖</div>
+        <h1 class="app-title">Little Reader</h1>
+        <p class="app-subtitle">Learn to read, one word at a time</p>
+      </div>
+      <div class="mode-grid">
+        <button class="mode-card" data-mode="sight-words"><span class="mode-icon">👁️</span><span class="mode-name">Sight Words</span><span class="mode-desc">Learn common words</span></button>
+        <button class="mode-card" data-mode="phonics"><span class="mode-icon">🔤</span><span class="mode-name">Phonics</span><span class="mode-desc">Sound it out</span></button>
+        <button class="mode-card" data-mode="sentences"><span class="mode-icon">📝</span><span class="mode-name">Sentences</span><span class="mode-desc">Read full sentences</span></button>
+        <button class="mode-card" data-mode="spelling"><span class="mode-icon">✏️</span><span class="mode-name">Spelling</span><span class="mode-desc">Tap the letters</span></button>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-label">Today's progress</div>
+        <div class="progress-track"><div class="progress-fill" id="daily-progress"></div></div>
+        <div class="progress-count" id="progress-count">0 words today</div>
+      </div>
+    </div>
+    <div id="screen-game" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btn-back">←</button>
+        <div class="game-mode-title" id="game-mode-title">Sight Words</div>
+        <div class="game-score" id="game-score">⭐ 0</div>
+      </div>
+      <div class="game-content" id="game-content"></div>
+      <div class="game-controls" id="game-controls"></div>
+      <div class="feedback-overlay" id="feedback-overlay">
+        <div class="feedback-emoji" id="feedback-emoji">🎉</div>
+        <div class="feedback-text" id="feedback-text">Great job!</div>
+      </div>
+    </div>
+    <div id="screen-results" class="screen">
+      <div class="results-content">
+        <div class="results-trophy">🏆</div>
+        <h2 class="results-title">Awesome!</h2>
+        <div class="results-stats">
+          <div class="stat-box"><div class="stat-number" id="result-correct">0</div><div class="stat-label">Correct</div></div>
+          <div class="stat-box"><div class="stat-number" id="result-total">0</div><div class="stat-label">Total</div></div>
+          <div class="stat-box"><div class="stat-number" id="result-stars">0</div><div class="stat-label">Stars ⭐</div></div>
+        </div>
+        <div class="results-message" id="results-message">Keep it up!</div>
+        <button class="btn-primary" id="btn-play-again">Play Again</button>
+        <button class="btn-secondary" id="btn-home">Home</button>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
