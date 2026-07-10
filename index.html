@@ -3,31 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6c63ff">
 <title>Little Reader</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #6C63FF 0%, #48CAE4 100%); font-family: 'Segoe UI', Arial, sans-serif; }
-  h1 { color: white; font-size: 1.7rem; margin-bottom: 2rem; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.2); letter-spacing: 0.01em; }
+  body {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #6C63FF 0%, #48CAE4 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow: hidden; position: relative;
+  }
+  .decor { position: absolute; inset: 0; pointer-events: none; }
+  .decor span { position: absolute; font-size: 28px; opacity: 0.25; animation: floaty 7s ease-in-out infinite; }
+  .decor span:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; }
+  .decor span:nth-child(2) { top: 15%; right: 10%; font-size: 34px; animation-delay: 1.5s; }
+  .decor span:nth-child(3) { bottom: 12%; left: 15%; animation-delay: 3s; }
+  .decor span:nth-child(4) { bottom: 20%; right: 12%; font-size: 22px; animation-delay: 4.5s; }
+  @keyframes floaty { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(8deg); } }
+  .logo { font-size: 3rem; text-align: center; margin-bottom: 0.25rem; }
+  h1 { color: white; font-size: 1.7rem; margin-bottom: 2.5rem; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.2); letter-spacing: 0.01em; }
   .profiles { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; padding: 0 1rem; }
-  .profile { background: white; border-radius: 20px; padding: 1.6rem 2rem; text-align: center; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.15); transition: transform 0.15s, box-shadow 0.15s; text-decoration: none; display: block; min-width: 130px; }
-  .profile:hover, .profile:active { transform: scale(1.06); box-shadow: 0 12px 40px rgba(0,0,0,0.22); }
-  .avatar { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 900; color: white; margin: 0 auto 1rem; }
-  .mia .avatar { background: linear-gradient(135deg, #FFB6C1, #FF69B4); }
-  .oskar .avatar { background: linear-gradient(135deg, #90EE90, #3CB371); }
+  .profile {
+    background: white; border-radius: 24px; padding: 1.8rem 2.2rem; text-align: center; cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18); transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none; display: block; min-width: 150px;
+  }
+  .profile:hover, .profile:active { transform: scale(1.06); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+  .avatar {
+    width: 130px; height: 130px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 4.5rem; margin: 0 auto 1rem; box-shadow: inset 0 0 0 5px rgba(255,255,255,0.6);
+  }
+  .mia .avatar { background: linear-gradient(135deg, #FFD6E5, #FF8FB3); }
+  .oskar .avatar { background: linear-gradient(135deg, #C8F5D8, #4CC97F); }
   .name { font-size: 1.6rem; font-weight: 800; color: #333; }
+  .stars { font-size: 0.95rem; font-weight: 700; color: #999; margin-top: 0.35rem; }
 </style>
 </head>
 <body>
+<div class="decor" aria-hidden="true"><span>⭐</span><span>📖</span><span>✨</span><span>🌈</span></div>
+<div class="logo">📖</div>
 <h1>Who is reading today?</h1>
 <div class="profiles">
   <a href="app.html?name=Mia" class="profile mia">
-    <div class="avatar">M</div>
+    <div class="avatar">🍓</div>
     <div class="name">Mia</div>
+    <div class="stars" id="stars-mia">⭐ 0 stars</div>
   </a>
   <a href="app.html?name=Oskar" class="profile oskar">
-    <div class="avatar">O</div>
+    <div class="avatar">🐉</div>
     <div class="name">Oskar</div>
+    <div class="stars" id="stars-oskar">⭐ 0 stars</div>
   </a>
 </div>
+<script>
+  function starsFor(name) {
+    try {
+      const raw = localStorage.getItem('lr_' + name + '_starsTotal');
+      return raw === null ? 0 : JSON.parse(raw);
+    } catch { return 0; }
+  }
+  document.getElementById('stars-mia').textContent = '⭐ ' + starsFor('Mia') + ' stars';
+  document.getElementById('stars-oskar').textContent = '⭐ ' + starsFor('Oskar') + ' stars';
+</script>
 </body>
 </html>

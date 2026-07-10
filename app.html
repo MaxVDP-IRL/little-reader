@@ -13,29 +13,46 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <script>
-  const _profileName = new URLSearchParams(location.search).get('name') || '';
-  const _emoji = _profileName === 'Mia' ? '🍓' : _profileName === 'Oskar' ? '🐉' : '';
-</script>
   <div id="app">
     <div id="screen-home" class="screen active">
       <div class="home-header">
+        <div class="header-decor" aria-hidden="true">
+          <span class="decor-emoji d1">⭐</span>
+          <span class="decor-emoji d2">📖</span>
+          <span class="decor-emoji d3">✨</span>
+        </div>
         <div class="app-logo">📖</div>
         <h1 class="app-title">Little Reader</h1>
         <p class="app-subtitle">Learn to read, one word at a time</p>
         <p id="profile-greeting" class="profile-greeting"></p>
+        <div class="level-select" id="level-select">
+          <button class="level-btn" data-level="1"><span class="level-emoji">🌱</span><span class="level-name">Sprout</span></button>
+          <button class="level-btn" data-level="2"><span class="level-emoji">🚀</span><span class="level-name">Explorer</span></button>
+          <button class="level-btn" data-level="3"><span class="level-emoji">⭐</span><span class="level-name">Star Reader</span></button>
+        </div>
+        <p id="home-stats" class="home-stats"></p>
       </div>
+      <div class="mode-section-label">Read</div>
       <div class="mode-grid">
-        <button class="mode-card" data-mode="sight-words"><span class="mode-icon">👁️</span><span class="mode-name">Sight Words</span><span class="mode-desc">Learn common words</span></button>
-        <button class="mode-card" data-mode="phonics"><span class="mode-icon">🔤</span><span class="mode-name">Phonics</span><span class="mode-desc">Sound it out</span></button>
+        <button class="mode-card" data-mode="story"><span class="mode-icon">📚</span><span class="mode-name">Story Time</span><span class="mode-desc">Read a story</span></button>
         <button class="mode-card" data-mode="sentences"><span class="mode-icon">📝</span><span class="mode-name">Sentences</span><span class="mode-desc">Read full sentences</span></button>
+        <button class="mode-card" data-mode="flash"><span class="mode-icon">⚡</span><span class="mode-name">Flash Words</span><span class="mode-desc">Quick word flashes</span></button>
+      </div>
+      <div class="mode-section-label">Play with Words</div>
+      <div class="mode-grid">
+        <button class="mode-card" data-mode="sound-detective"><span class="mode-icon">🎧</span><span class="mode-name">Sound Detective</span><span class="mode-desc">Listen and find it</span></button>
+        <button class="mode-card" data-mode="phonics"><span class="mode-icon">🔤</span><span class="mode-name">Phonics</span><span class="mode-desc">Sound it out</span></button>
         <button class="mode-card" data-mode="spelling"><span class="mode-icon">✏️</span><span class="mode-name">Spelling</span><span class="mode-desc">Tap the letters</span></button>
+        <button class="mode-card" data-mode="rhyme"><span class="mode-icon">🎵</span><span class="mode-name">Rhyme Time</span><span class="mode-desc">Find the rhyme</span></button>
+        <button class="mode-card" data-mode="cloze"><span class="mode-icon">🕳️</span><span class="mode-name">Missing Word</span><span class="mode-desc">Fill the blank</span></button>
+        <button class="mode-card" data-mode="scramble"><span class="mode-icon">🧩</span><span class="mode-name">Sentence Scramble</span><span class="mode-desc">Put it in order</span></button>
       </div>
       <div class="progress-bar-container">
         <div class="progress-label">Today's progress</div>
         <div class="progress-track"><div class="progress-fill" id="daily-progress"></div></div>
         <div class="progress-count" id="progress-count">0 words today</div>
       </div>
+      <button class="stickers-btn" id="btn-stickers">🏅 Sticker Book</button>
     </div>
     <div id="screen-game" class="screen">
       <div class="game-header">
@@ -64,13 +81,19 @@
         <button class="btn-secondary" id="btn-home">Home</button>
       </div>
     </div>
+    <div id="screen-stickers" class="screen">
+      <div class="game-header">
+        <button class="btn-back" id="btn-stickers-back">←</button>
+        <div class="game-mode-title">🏅 Sticker Book</div>
+        <div class="game-header-spacer"></div>
+      </div>
+      <div class="sticker-screen-content">
+        <div class="sticker-count" id="sticker-count">0 / 32 stickers found</div>
+        <div class="sticker-grid" id="sticker-grid"></div>
+      </div>
+    </div>
   </div>
-  <script>
-  if (_profileName) {
-    const el = document.getElementById('profile-greeting');
-    if (el) el.textContent = 'Hi ' + _profileName + '! ' + _emoji;
-  }
-</script>
+  <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
